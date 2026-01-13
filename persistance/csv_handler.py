@@ -9,7 +9,7 @@ class CsvHandler():
              self.words = list(reader(fp))
 
 
-    def write_csv(self, filename, languages):
+    def write_csv(self, filename):
         if PREFIX not in filename:
             filename = PREFIX + filename
         #* write csv file
