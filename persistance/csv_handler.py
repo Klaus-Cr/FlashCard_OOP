@@ -15,6 +15,6 @@ class CsvHandler():
         #* write csv file
         with open(file=DATA_DIR / filename, mode="w", encoding=CSV_ENCODING, newline="") as fp:
             write_csv = writer(fp)
-            write_csv.writerow(languages)
+#            write_csv.writerow(languages)
             write_csv.writerows(self.words)
 

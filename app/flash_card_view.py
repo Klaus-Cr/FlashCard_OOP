@@ -35,6 +35,8 @@ class FlashcardView():
 
 
     def show_new_word(self, words, languages):
+        # I have to store the languages as attributes because I can't
+        # give arguments to flip_card()
         self.languages = languages
         self.words = words
         self.button_ok.config(state="disabled")
