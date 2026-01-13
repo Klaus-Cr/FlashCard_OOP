@@ -31,3 +31,13 @@ This architectural approach emphasizes:
 
 📦 Summary
 This project demonstrates the transition from a procedural implementation to a clean, object-oriented design with well-defined architectural boundaries, focusing on structure and code quality rather than new features.
+
+❗ Acknowledgments
+
+The overall project structure, architectural decisions (MVC-style separation),
+and documentation approach were developed with the assistance of ChatGPT.
+This includes guidance on folder layout, class responsibilities, callback
+design, type annotations, and docstring conventions.
+
+All implementation decisions and final code were written and reviewed by the
+author.
