@@ -31,8 +31,9 @@ class FlashcardApp():
 
         self.csv_handler = CsvHandler(filename=filename)
         self.word_trainer = WordTrainer(self.csv_handler.words)
-        self.word_trainer.get_new_word()
-        self.flash_card_view.show_new_word(self.word_trainer.word_combo, self.word_trainer.languages)
+        self.on_button_clicked(False)
+        #self.word_trainer.get_new_word()
+        #self.flash_card_view.show_new_word(self.word_trainer.word_combo, self.word_trainer.languages)
         self.flash_card_view.run()
         self.csv_handler.write_csv(filename)
 

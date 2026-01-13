@@ -1,6 +1,6 @@
 from app.flash_card_app import FlashcardApp
 
-def main():
+def main() -> None:
     """
     Application entry point for the flashcard trainer.
 
