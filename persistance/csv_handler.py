@@ -18,18 +18,17 @@ class CsvHandler():
     stateless with respect to application logic.
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename: str):
         self.words = []
         #* read the csv file
         with open(file=DATA_DIR / filename, mode="r", encoding=CSV_ENCODING) as fp:
              self.words = list(reader(fp))
 
 
-    def write_csv(self, filename):
+    def write_csv(self, filename: str):
         if PREFIX not in filename:
             filename = PREFIX + filename
         #* write csv file
         with open(file=DATA_DIR / filename, mode="w", encoding=CSV_ENCODING, newline="") as fp:
             write_csv = writer(fp)
             write_csv.writerows(self.words)
-
