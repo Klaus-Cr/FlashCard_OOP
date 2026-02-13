@@ -17,7 +17,7 @@ class WordTrainer():
     This class contains no user interface code and no persistence logic.
     It represents pure domain behavior and can be tested independently.
     """
-    def __init__(self, words: list):
+    def __init__(self, words: list[list[str]]):
         self.words = words
         self.languages = self.words[0]
 

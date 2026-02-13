@@ -38,8 +38,8 @@ class FlashcardApp():
         self.csv_handler.write_csv(filename)
 
 
-    def on_button_clicked(self, correct: bool) -> None:
-        if correct:
+    def on_button_clicked(self, is_correct: bool) -> None:
+        if is_correct:
             self.word_trainer.delete_word_combo()
         self.word_trainer.get_new_word()
         self.flash_card_view.show_new_word(self.word_trainer.word_combo, self.word_trainer.languages)

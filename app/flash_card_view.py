@@ -1,12 +1,13 @@
 from tkinter import Tk, Button, PhotoImage, Canvas, filedialog
 from os import path
 from functools import partial
+from typing import Callable
 from config import (BACKGROUND_COLOR, CARD_FRONT_IMAGE,
                    CARD_BACK_IMAGE, BUTTON_OK_IMAGE,
                    BUTTON_NOK_IMAGE, WINDOW_WIDTH, WINDOW_HEIGHT,
                    WINDOW_PADDING, WINDOW_TITLE, DATA_DIR)
 
-class FlashcardView():
+class FlashcardView:
     """
     User interface component for the flashcard training application.
 
@@ -25,8 +26,8 @@ class FlashcardView():
     This class contains no domain logic and no persistence logic.
     All application decisions are delegated to the controller.
     """
-    def __init__(self, on_button_clicked):
-        self.on_button_clicked = on_button_clicked
+    def __init__(self, on_button_clicked: Callable[[bool], None]):
+        self.on_button_clicked: Callable[[bool], None]= on_button_clicked
         self.root = Tk()
         self.root.config(width=WINDOW_WIDTH, height=WINDOW_HEIGHT,
                          padx=WINDOW_PADDING, pady=WINDOW_PADDING, bg=BACKGROUND_COLOR)
@@ -37,8 +38,8 @@ class FlashcardView():
         self.canvas_card = Canvas(width=800,height=526,background=BACKGROUND_COLOR, highlightthickness=0)
         self.image_card1 = PhotoImage(file=CARD_FRONT_IMAGE)
         self.image_card2 = PhotoImage(file=CARD_BACK_IMAGE)
-        self.canvas_card.create_image(0, 0, image=self.image_card2, anchor="nw", tags="bg")
-        self.canvas_card.create_image(0, 0, image=self.image_card1, anchor="nw", tags="fg")
+        self.canvas_card.create_image(0, 0, image=self.image_card2, anchor="nw", tags="bg") # type: ignore
+        self.canvas_card.create_image(0, 0, image=self.image_card1, anchor="nw", tags="fg") # type: ignore
         self.canvas_card.grid(row=1,column=1,columnspan=2)
         self.canvas_card.create_text(400,150,font=("Arial",40,"italic"), tags="language")
         self.canvas_card.create_text(400,263,font=("Arial",60,"bold"), tags="word")
@@ -53,9 +54,11 @@ class FlashcardView():
                             command=partial(self.on_button_clicked, False))
         self.button_ok.grid(row=2, column=2)
         self.button_nok.grid(row=2, column=1)
+        self.languages = []
+        self.words = []
 
 
-    def show_new_word(self, words: list, languages: list) -> None:
+    def show_new_word(self, words: list[str], languages: list[str]) -> None:
         # I have to store the languages as attributes because I can't
         # give arguments to flip_card()
         self.languages = languages
@@ -65,7 +68,7 @@ class FlashcardView():
         self.canvas_card.tag_lower("bg")
         self.canvas_card.itemconfigure("language", text=self.languages[0])
         self.canvas_card.itemconfigure("word", text=words[0])
-        self.root.after(3000,self.flip_card)
+        self.root.after(3000,func=self.flip_card)
 
 
     def flip_card(self) -> None:
@@ -90,6 +93,9 @@ class FlashcardView():
     def close(self) -> None:
         self.root.destroy()
 
+    # def on_button_clicked(self, is_correct: bool) -> None:
+    #     # ...existing code...
+    #     pass
 
     def run(self) -> None:
         self.root.mainloop()
